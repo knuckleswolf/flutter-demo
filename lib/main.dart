@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:places/gen/fonts.gen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +15,43 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MyFirstWidget(title: 'Main page title'),
+      home: const MyHomePage(title: 'My home page'),
     );
   }
+}
+
+class MyFirstWidget extends StatelessWidget {
+  final String title;
+
+  const MyFirstWidget({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title), // title
+      ),
+      body: Center(
+        child: Text(
+          'Hello! Title - $title', // title
+          style: const TextStyle(
+            fontFamily: FontFamily.roboto,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // void showContext() {
+  // debugPrint('context: ${context.runtimeType}'); // context not found
+  // }
 }
 
 class MyHomePage extends StatefulWidget {
   final String title;
 
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -33,6 +62,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    showContext(); // it's worked
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -57,6 +88,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  void showContext() {
+    debugPrint('context: ${context.runtimeType}');
   }
 
   void _incrementCounter() {
