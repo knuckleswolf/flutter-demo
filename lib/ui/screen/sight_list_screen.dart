@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/gen/colors.gen.dart';
+import 'package:places/mocks.dart';
+import 'package:places/ui/screen/sight_card.dart';
 
 class SightListScreen extends StatefulWidget {
   const SightListScreen({super.key});
@@ -32,39 +34,6 @@ class TextWithStyle extends StatelessWidget {
   }
 }
 
-class RichTextWithStyle extends StatelessWidget {
-  const RichTextWithStyle({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-      text: const TextSpan(
-        style: TextSettings.style,
-        children: [
-          TextSpan(
-            text: 'С',
-            style: TextStyle(
-              color: ColorName.green,
-            ),
-          ),
-          TextSpan(
-            text: 'писок \n',
-          ),
-          TextSpan(
-            text: 'и',
-            style: TextStyle(
-              color: ColorName.yellow,
-            ),
-          ),
-          TextSpan(
-            text: 'нтересных мест',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _SightListScreenState extends State<SightListScreen> {
   @override
   Widget build(BuildContext context) {
@@ -74,8 +43,36 @@ class _SightListScreenState extends State<SightListScreen> {
         toolbarHeight: 112.0,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const TextWithStyle(), // or const RichTextWithStyle()
+        title: const TextWithStyle(),
       ),
+      body: const SingleChildScrollView(
+        child: SightCards(),
+      ),
+    );
+  }
+}
+
+class SightCards extends StatelessWidget {
+  const SightCards({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder: _buildMyWidget,
+    );
+  }
+
+  Widget _buildMyWidget(BuildContext _) {
+    return Column(
+      children: mocks
+          .map(
+            (item) => Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: SightCard(item: item),
+            ),
+          )
+          .toList(),
     );
   }
 }
