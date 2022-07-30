@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/gen/colors.gen.dart';
+import 'package:places/ui/res/constants/strings.dart';
+import 'package:places/ui/res/constants/typography.dart';
 
 class SightDetails extends StatelessWidget {
-  static const expandedHeight = 360.0;
   final Sight item;
-
-  bool get _pinned => true;
-  bool get _snap => false;
-  bool get _floating => false;
 
   const SightDetails({
     super.key,
@@ -25,11 +22,9 @@ class SightDetails extends StatelessWidget {
         ),
         slivers: <Widget>[
           SliverAppBar(
-            pinned: _pinned,
-            snap: _snap,
-            floating: _floating,
+            pinned: true,
             stretch: true,
-            expandedHeight: expandedHeight,
+            expandedHeight: 360.0,
             backgroundColor: ColorName.main,
             elevation: 0,
             leading: UnconstrainedBox(
@@ -96,10 +91,7 @@ class SightDetails extends StatelessWidget {
                     children: [
                       Text(
                         item.name,
-                        style: const TextStyle(
-                          height: 1.2,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
+                        style: AppTypography.title.copyWith(
                           color: ColorName.secondary,
                         ),
                       ),
@@ -109,19 +101,14 @@ class SightDetails extends StatelessWidget {
                           children: [
                             Text(
                               item.type,
-                              style: const TextStyle(
-                                height: 1.28,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
+                              style: AppTypography.smallBold.copyWith(
                                 color: ColorName.secondary,
                               ),
                             ),
                             const SizedBox(width: 16),
-                            const Text(
-                              'закрыто до 09:00',
-                              style: TextStyle(
-                                height: 1.28,
-                                fontSize: 14,
+                            Text(
+                              SightDetailsStrings.workingHours,
+                              style: AppTypography.small.copyWith(
                                 color: ColorName.secondary2,
                               ),
                             ),
@@ -130,9 +117,7 @@ class SightDetails extends StatelessWidget {
                       ),
                       Text(
                         item.details,
-                        style: const TextStyle(
-                          height: 1.28,
-                          fontSize: 14,
+                        style: AppTypography.small.copyWith(
                           color: ColorName.secondary,
                         ),
                       ),
@@ -147,17 +132,15 @@ class SightDetails extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12)),
                             ),
-                            textStyle: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            textStyle: AppTypography.smallBold,
                           ),
                           onPressed: () {},
                           icon: const Icon(
                             Icons.roundabout_right,
                             size: 24.0,
                           ),
-                          label: Text('Построить маршрут'.toUpperCase()),
+                          label: Text(SightDetailsStrings.buildRouteButton
+                              .toUpperCase()),
                         ),
                       ),
                       Divider(
@@ -171,16 +154,16 @@ class SightDetails extends StatelessWidget {
                                 splashFactory: NoSplash.splashFactory,
                                 primary: ColorName.inactive,
                                 fixedSize: const Size.fromHeight(40),
-                                textStyle: const TextStyle(
-                                  fontSize: 14,
-                                ),
+                                textStyle: AppTypography.small,
                               ),
                               onPressed: () {},
                               icon: const Icon(
                                 Icons.calendar_month_outlined,
                                 size: 24.0,
                               ),
-                              label: const Text('Запланировать'),
+                              label: const Text(
+                                SightDetailsStrings.scheduleButton,
+                              ),
                             ),
                           ),
                           Expanded(
@@ -189,16 +172,15 @@ class SightDetails extends StatelessWidget {
                                 splashFactory: NoSplash.splashFactory,
                                 primary: ColorName.secondary,
                                 fixedSize: const Size.fromHeight(40),
-                                textStyle: const TextStyle(
-                                  fontSize: 14,
-                                ),
+                                textStyle: AppTypography.small,
                               ),
                               onPressed: () {},
                               icon: const Icon(
                                 Icons.favorite_border_outlined,
                                 size: 24.0,
                               ),
-                              label: const Text('В Избранное'),
+                              label:
+                                  const Text(SightDetailsStrings.toFavorites),
                             ),
                           ),
                         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/gen/colors.gen.dart';
+import 'package:places/ui/res/constants/typography.dart';
 
 class SightCard extends StatelessWidget {
   static const double thumbHeight = 96.0;
@@ -55,10 +56,7 @@ class SightCard extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   child: Text(
                     item.type,
-                    style: const TextStyle(
-                      height: 1.28,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                    style: AppTypography.smallBold.copyWith(
                       color: ColorName.white,
                     ),
                   ),
@@ -80,18 +78,13 @@ class SightCard extends StatelessWidget {
                 children: [
                   Text(
                     item.name,
-                    style: const TextStyle(
-                      height: 1.25,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
+                    style: AppTypography.text.copyWith(
                       color: ColorName.secondary,
                     ),
                   ),
                   Text(
                     item.details,
-                    style: const TextStyle(
-                      height: 1.28,
-                      fontSize: 14,
+                    style: AppTypography.small.copyWith(
                       color: ColorName.secondary2,
                     ),
                   ),

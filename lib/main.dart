@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/gen/fonts.gen.dart';
 import 'package:places/mocks.dart';
+import 'package:places/ui/res/constants/strings.dart';
 import 'package:places/ui/screen/sight_details.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: AppStrings.title,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         primarySwatch: Colors.blueGrey,
