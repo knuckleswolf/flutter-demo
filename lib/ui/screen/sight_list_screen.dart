@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:places/gen/colors.gen.dart';
+import 'package:places/mocks.dart';
+import 'package:places/ui/res/constants/strings.dart';
+import 'package:places/ui/res/constants/typography.dart';
+import 'package:places/ui/screen/sight_card.dart';
 
 class SightListScreen extends StatefulWidget {
   const SightListScreen({super.key});
@@ -8,59 +12,17 @@ class SightListScreen extends StatefulWidget {
   State<SightListScreen> createState() => _SightListScreenState();
 }
 
-class TextSettings {
-  static const TextStyle style = TextStyle(
-    height: 1.125,
-    fontSize: 32,
-    fontWeight: FontWeight.bold,
-    color: ColorName.main,
-  );
-
-  static const String title = 'Список \nинтересных мест';
-}
-
 class TextWithStyle extends StatelessWidget {
   const TextWithStyle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      TextSettings.title,
-      style: TextSettings.style,
-      textAlign: TextAlign.start,
-    );
-  }
-}
-
-class RichTextWithStyle extends StatelessWidget {
-  const RichTextWithStyle({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-      text: const TextSpan(
-        style: TextSettings.style,
-        children: [
-          TextSpan(
-            text: 'С',
-            style: TextStyle(
-              color: ColorName.green,
-            ),
-          ),
-          TextSpan(
-            text: 'писок \n',
-          ),
-          TextSpan(
-            text: 'и',
-            style: TextStyle(
-              color: ColorName.yellow,
-            ),
-          ),
-          TextSpan(
-            text: 'нтересных мест',
-          ),
-        ],
+    return Text(
+      SightListScreenStrings.title,
+      style: AppTypography.largeTitle.copyWith(
+        color: ColorName.secondary,
       ),
+      textAlign: TextAlign.start,
     );
   }
 }
@@ -74,8 +36,32 @@ class _SightListScreenState extends State<SightListScreen> {
         toolbarHeight: 112.0,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const TextWithStyle(), // or const RichTextWithStyle()
+        title: const TextWithStyle(),
       ),
+      body: const SingleChildScrollView(
+        child: _SightCards(),
+      ),
+    );
+  }
+}
+
+class _SightCards extends StatelessWidget {
+  const _SightCards({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: mocks
+          .map(
+            (item) => Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
+              child: SightCard(item: item),
+            ),
+          )
+          .toList(),
     );
   }
 }

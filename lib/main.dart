@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:places/gen/fonts.gen.dart';
-import 'package:places/ui/screen/sight_list_screen.dart';
+import 'package:places/mocks.dart';
+import 'package:places/ui/res/constants/strings.dart';
+import 'package:places/ui/screen/sight_details.dart';
 
 void main() {
   runApp(const App());
@@ -12,14 +14,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: AppStrings.title,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
         fontFamily: FontFamily.roboto,
       ),
-      home: const SafeArea(
-        child: SightListScreen(),
+      home: SafeArea(
+        child: SightDetails(item: mocks[0]), // or SightListScreen()
       ),
     );
   }
