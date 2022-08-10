@@ -30,15 +30,21 @@ class TextWithStyle extends StatelessWidget {
 class _SightListScreenState extends State<SightListScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        toolbarHeight: 112.0,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const TextWithStyle(),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(128.0),
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            top: 40.0,
+            bottom: 16.0,
+          ),
+          child: TextWithStyle(),
+        ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: _SightCards(),
       ),
     );
@@ -50,18 +56,20 @@ class _SightCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: mocks
-          .map(
-            (item) => Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 8.0,
-              ),
-              child: SightCard(item: item),
-            ),
-          )
-          .toList(),
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 16.0,
+        right: 16.0,
+        bottom: 16.0,
+      ),
+      child: Wrap(
+        runSpacing: 16,
+        children: mocks
+            .map(
+              (item) => SightCard(item: item),
+            )
+            .toList(),
+      ),
     );
   }
 }

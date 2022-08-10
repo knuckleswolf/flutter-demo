@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/gen/fonts.gen.dart';
-import 'package:places/mocks.dart';
 import 'package:places/ui/res/constants/strings.dart';
-import 'package:places/ui/screen/sight_details.dart';
+import 'package:places/ui/screen/sight_list_screen.dart';
 
 void main() {
   runApp(const App());
@@ -21,8 +20,9 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
         fontFamily: FontFamily.roboto,
       ),
-      home: SafeArea(
-        child: SightDetails(item: mocks[0]), // or SightListScreen()
+      home: const SafeArea(
+        child: SightListScreen(),
+        // child: SightDetails(item: mocks[0]), // or SightListScreen()
       ),
     );
   }
