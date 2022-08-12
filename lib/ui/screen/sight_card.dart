@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/gen/colors.gen.dart';
 import 'package:places/ui/res/constants/typography.dart';
+import 'package:places/ui/widgets/progress_indicator.dart';
 
 class SightCard extends StatelessWidget {
   static const double thumbHeight = 96.0;
@@ -28,14 +29,22 @@ class SightCard extends StatelessWidget {
                 children: [
                   Container(
                     height: thumbHeight,
-                    decoration: BoxDecoration(
-                      color: ColorName.white,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          item.url,
-                        ),
-                      ),
+                    color: ColorName.white,
+                    child: Image.network(
+                      item.imageUrl,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+
+                        return PlacesProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                              : null,
+                        );
+                      },
                     ),
                   ),
                   Opacity(

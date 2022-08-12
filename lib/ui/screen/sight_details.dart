@@ -3,6 +3,7 @@ import 'package:places/domain/sight.dart';
 import 'package:places/gen/colors.gen.dart';
 import 'package:places/ui/res/constants/strings.dart';
 import 'package:places/ui/res/constants/typography.dart';
+import 'package:places/ui/widgets/progress_indicator.dart';
 
 class SightDetails extends StatelessWidget {
   final Sight item;
@@ -48,15 +49,23 @@ class SightDetails extends StatelessWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: ColorName.background,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          item.url,
-                        ),
-                      ),
+                  ColoredBox(
+                    color: ColorName.background,
+                    child: Image.network(
+                      item.imageUrl,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+
+                        return PlacesProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                              : null,
+                        );
+                      },
                     ),
                   ),
                   Opacity(
